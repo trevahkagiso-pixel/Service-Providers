@@ -2,6 +2,7 @@
 ├── README.md
 ├── service-booking-fe
 │   ├── README.md
+│   ├── amplify.yml
 │   ├── eslint.config.js
 │   ├── index.html
 │   ├── node_modules
@@ -6381,4 +6382,4 @@
 │   └── vite.config.ts
 └── service_tree.txt
 
-582 directories, 5800 files
+582 directories, 5801 files
