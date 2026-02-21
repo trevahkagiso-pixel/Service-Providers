@@ -1,0 +1,20 @@
+version: 1
+frontend:
+  phases:
+    preBuild:
+      commands:
+        - npm ci --prefix service-booking-fe
+    build:
+      commands:
+        - npm run build --prefix service-booking-fe
+  artifacts:
+    baseDirectory: service-booking-fe/dist
+    files:
+      - '**/*'
+  cache:
+    paths:
+      - service-booking-fe/node_modules/**/*
+  redirects:
+    - source: '</^[^.]+$|\.(?!.*\.)/'
+      destination: /index.html
+      status: 200
