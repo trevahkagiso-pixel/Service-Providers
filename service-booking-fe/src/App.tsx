@@ -6,15 +6,20 @@ import ProviderSignup from './pages/ProviderSignup'
 
 export default function App() {
   return (
-    <div className="min-h-screen font-sans text-slate-900">
-      <nav style={{padding: '12px 16px', borderBottom: '1px solid #eee'}}>
-        <Link to="/" style={{marginRight: 12, fontWeight: 600}}>ServiceBooking</Link>
-        <Link to="/services" style={{marginRight: 12}}>Services</Link>
-        <Link to="/book" style={{marginRight: 12}}>Book</Link>
-        <Link to="/provider-signup">Become a Provider</Link>
+    <>
+      <nav>
+        <div className="nav-container">
+          <Link to="/" className="nav-brand">🔧 ServiceHub</Link>
+          <div className="nav-links">
+            <Link to="/">Home</Link>
+            <Link to="/services">Services</Link>
+            <Link to="/book">Book Service</Link>
+            <Link to="/provider-signup" className="cta-btn">Become a Provider</Link>
+          </div>
+        </div>
       </nav>
 
-      <main style={{padding: 16}}>
+      <main>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/services" element={<Services />} />
@@ -23,6 +28,11 @@ export default function App() {
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </main>
-    </div>
+
+      <footer style={{backgroundColor: 'var(--color-bg-light)', borderTop: '1px solid var(--color-border)', padding: 'var(--spacing-xl)', textAlign: 'center', color: 'var(--color-text-light)'}}
+      >
+        <p>&copy; 2026 ServiceHub. All rights reserved.</p>
+      </footer>
+    </>
   )
 }
