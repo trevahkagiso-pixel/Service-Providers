@@ -14,7 +14,3 @@ frontend:
   cache:
     paths:
       - service-booking-fe/node_modules/**/*
-  redirects:
-    - source: '</^[^.]+$|\.(?!.*\.)/'
-      destination: /index.html
-      status: 200
