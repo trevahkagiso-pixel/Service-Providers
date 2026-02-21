@@ -3,12 +3,10 @@ frontend:
   phases:
     preBuild:
       commands:
-        - cd service-booking-fe
-        - npm ci
+        - npm ci --prefix service-booking-fe
     build:
       commands:
-        - cd service-booking-fe
-        - npm run build
+        - npm run build --prefix service-booking-fe
   artifacts:
     baseDirectory: service-booking-fe/dist
     files:
