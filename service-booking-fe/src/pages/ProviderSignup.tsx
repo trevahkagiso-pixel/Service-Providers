@@ -1,32 +1,32 @@
 import { Link } from 'react-router-dom'
+import FeatureCard from '../components/FeatureCard'
+
+const benefits = [
+  { icon: '💼', title: 'Customer Access', description: 'Connect with verified customer requests instantly' },
+  { icon: '🕐', title: 'Flexible Work', description: 'Set your own schedule and rates' },
+  { icon: '⭐', title: 'Build Reputation', description: 'Establish ratings and grow your business' },
+  { icon: '💳', title: 'Safe Payments', description: 'Secure payment processing with zero fees' },
+  { icon: '📊', title: 'Business Tools', description: 'Analytics and growth resources included' },
+  { icon: '🎓', title: '24/7 Support', description: 'Expert support team always available' }
+]
+
+const steps = [
+  { num: 1, title: 'Create Your Profile', description: 'Set up your business profile with services offered' },
+  { num: 2, title: 'Verify Your Credentials', description: 'Quick verification ensures customer trust' },
+  { num: 3, title: 'Start Getting Jobs', description: 'Receive customer requests and grow your earnings' }
+]
+
+const stats = [
+  { number: '10k+', label: 'Active Professionals' },
+  { number: '50k+', label: 'Happy Customers' },
+  { number: '4.8★', label: 'Average Rating' }
+]
 
 export default function ProviderSignup() {
-  const benefits = [
-    { icon: '💼', title: 'Customer Access', desc: 'Connect with verified customer requests instantly' },
-    { icon: '🕐', title: 'Flexible Work', desc: 'Set your own schedule and rates' },
-    { icon: '⭐', title: 'Build Reputation', desc: 'Establish ratings and grow your business' },
-    { icon: '💳', title: 'Safe Payments', desc: 'Secure payment processing with zero fees' },
-    { icon: '📊', title: 'Business Tools', desc: 'Analytics and growth resources included' },
-    { icon: '🎓', title: '24/7 Support', desc: 'Expert support team always available' }
-  ]
-
-  const steps = [
-    { num: 1, title: 'Create Your Profile', desc: 'Set up your business profile with services offered' },
-    { num: 2, title: 'Verify Your Credentials', desc: 'Quick verification ensures customer trust' },
-    { num: 3, title: 'Start Getting Jobs', desc: 'Receive customer requests and grow your earnings' }
-  ]
-
-  const futureStats = [
-    { number: '10k+', label: 'Active Professionals' },
-    { number: '50k+', label: 'Happy Customers' },
-    { number: '4.8★', label: 'Average Rating' }
-  ]
-
   return (
     <section>
       <div style={{maxWidth: '900px', margin: '0 auto'}}>
-        <div className="card" style={{
-          background: 'linear-gradient(135deg, #6366f1 0%, #4f46e5 50%, #10b981 100%)',
+        <div className="card gradient-bg" style={{
           color: 'white',
           textAlign: 'center',
           marginBottom: 'var(--spacing-2xl)',
@@ -42,9 +42,9 @@ export default function ProviderSignup() {
         </div>
 
         <div className="grid grid-3" style={{marginBottom: 'var(--spacing-2xl)'}}>
-          {futureStats.map((stat) => (
-            <div key={stat.label} className="card" style={{textAlign: 'center'}}>
-              <div style={{fontSize: '2.5rem', fontWeight: 'bold', background: 'linear-gradient(135deg, #6366f1, #10b981)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', marginBottom: 'var(--spacing-sm)'}}>
+          {stats.map((stat) => (
+            <div key={stat.label} className="card feature-card">
+              <div className="gradient-text" style={{fontSize: '2.5rem', fontWeight: 'bold', marginBottom: 'var(--spacing-sm)'}}>
                 {stat.number}
               </div>
               <p style={{margin: 0, color: 'var(--color-text-light)', fontWeight: 500}}>
@@ -55,14 +55,10 @@ export default function ProviderSignup() {
         </div>
 
         <div style={{marginBottom: 'var(--spacing-2xl)'}}>
-          <h2 style={{textAlign: 'center', marginBottom: 'var(--spacing-xl)'}}>Why Professional Choose Us</h2>
+          <h2 style={{textAlign: 'center', marginBottom: 'var(--spacing-xl)'}}>Why Professionals Choose Us</h2>
           <div className="grid grid-2">
             {benefits.map((benefit) => (
-              <div key={benefit.title} className="card">
-                <div style={{fontSize: '2.5rem', marginBottom: 'var(--spacing-md)'}}>{benefit.icon}</div>
-                <h4 style={{marginBottom: 'var(--spacing-sm)'}}>{benefit.title}</h4>
-                <p style={{margin: 0, fontSize: '0.95rem'}}>{benefit.desc}</p>
-              </div>
+              <FeatureCard key={benefit.title} {...benefit} />
             ))}
           </div>
         </div>
@@ -91,7 +87,7 @@ export default function ProviderSignup() {
                 </div>
                 <div>
                   <h4 style={{marginBottom: 'var(--spacing-sm)', fontSize: '1.2rem'}}>{step.title}</h4>
-                  <p style={{margin: 0, color: 'var(--color-text-light)'}}>{step.desc}</p>
+                  <p style={{margin: 0, color: 'var(--color-text-light)'}}>{step.description}</p>
                 </div>
               </div>
             ))}

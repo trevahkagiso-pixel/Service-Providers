@@ -28,7 +28,6 @@ export default function App() {
         <div className="nav-container">
           <Link to="/" className="nav-brand">🔧 ServiceHub</Link>
           <div className="nav-links">
-            <Link to="/">Home</Link>
             <Link to="/services">Services</Link>
             <Link to="/book">Book</Link>
             <Link to="/provider-signup" className="cta-btn">Become a Provider</Link>

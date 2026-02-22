@@ -1,38 +1,29 @@
 import { Link } from 'react-router-dom'
+import FeatureCard from '../components/FeatureCard'
+
+const features = [
+  { icon: '⚡', title: 'Lightning Fast', description: 'Get matched with verified providers in minutes' },
+  { icon: '⭐', title: 'Top Rated Pros', description: 'Only professionals with proven track records' },
+  { icon: '💰', title: 'Best Prices', description: 'Transparent pricing with zero hidden fees' },
+  { icon: '🛡️', title: 'Fully Secured', description: 'Bank-grade protection for your data' }
+]
+
+const benefits = [
+  { icon: '📱', title: 'Mobile Ready', description: 'Book anytime, anywhere with one tap' },
+  { icon: '🕐', title: 'Instant Scheduling', description: 'Same-day or weeks ahead—your choice' },
+  { icon: '💳', title: 'Secure Payments', description: 'Multiple payment options, guaranteed safe' },
+  { icon: '📞', title: '24/7 Support', description: 'We\'re here whenever you need us' },
+  { icon: '✅', title: 'Quality Guarantee', description: 'Satisfaction guaranteed or your money back' },
+  { icon: '🌟', title: 'Best Value', description: 'Premium quality at competitive rates' }
+]
+
+const steps = [
+  { num: 1, title: 'Post Your Request', description: 'Describe what you need and set your budget' },
+  { num: 2, title: 'Get Quotes', description: 'Receive offers from qualified professionals' },
+  { num: 3, title: 'Book & Enjoy', description: 'Choose the best fit and relax' }
+]
 
 export default function Home() {
-  const features = [
-    {
-      icon: '⚡',
-      title: 'Lightning Fast',
-      description: 'Get matched with verified providers in minutes'
-    },
-    {
-      icon: '⭐',
-      title: 'Top Rated Pros',
-      description: 'Only professionals with proven track records'
-    },
-    {
-      icon: '💰',
-      title: 'Best Prices',
-      description: 'Transparent pricing with zero hidden fees'
-    },
-    {
-      icon: '🛡️',
-      title: 'Fully Secured',
-      description: 'Bank-grade protection for your data'
-    }
-  ]
-
-  const benefits = [
-    { icon: '📱', title: 'Mobile Ready', text: 'Book anytime, anywhere with one tap' },
-    { icon: '🕐', title: 'Instant Scheduling', text: 'Same-day or weeks ahead—your choice' },
-    { icon: '💳', title: 'Secure Payments', text: 'Multiple payment options, guaranteed safe' },
-    { icon: '📞', title: '24/7 Support', text: 'We\'re here whenever you need us' },
-    { icon: '✅', title: 'Quality Guarantee', text: 'Satisfaction guaranteed or your money back' },
-    { icon: '🌟', title: 'Best Value', text: 'Premium quality at competitive rates' }
-  ]
-
   return (
     <section>
       <div className="hero">
@@ -46,11 +37,7 @@ export default function Home() {
 
       <div className="grid grid-4" style={{marginTop: 'var(--spacing-2xl)', marginBottom: 'var(--spacing-2xl)'}}>
         {features.map((feature) => (
-          <div key={feature.title} className="card">
-            <div className="card-icon">{feature.icon}</div>
-            <h4>{feature.title}</h4>
-            <p>{feature.description}</p>
-          </div>
+          <FeatureCard key={feature.title} {...feature} />
         ))}
       </div>
 
@@ -58,17 +45,12 @@ export default function Home() {
         <h2 style={{textAlign: 'center', marginBottom: 'var(--spacing-2xl)'}}>Why Choose Us?</h2>
         <div className="grid grid-3">
           {benefits.map((benefit) => (
-            <div key={benefit.title} className="card">
-              <div style={{fontSize: '2.5rem', marginBottom: 'var(--spacing-md)'}}>{benefit.icon}</div>
-              <h4 style={{marginBottom: 'var(--spacing-sm)'}}>{benefit.title}</h4>
-              <p>{benefit.text}</p>
-            </div>
+            <FeatureCard key={benefit.title} {...benefit} />
           ))}
         </div>
       </div>
 
-      <div className="card" style={{
-        background: 'linear-gradient(135deg, #6366f1 0%, #4f46e5 50%, #10b981 100%)',
+      <div className="card gradient-bg" style={{
         color: 'white',
         textAlign: 'center',
         padding: 'var(--spacing-2xl)',
@@ -89,21 +71,13 @@ export default function Home() {
       <div style={{textAlign: 'center', marginTop: 'var(--spacing-2xl)'}}>        
         <h2 style={{marginBottom: 'var(--spacing-xl)'}}>How It Works</h2>
         <div className="grid grid-3">
-          <div className="card" style={{position: 'relative'}}>
-            <div style={{fontSize: '3rem', marginBottom: 'var(--spacing-md)', fontWeight: 'bold', background: 'linear-gradient(135deg, #6366f1, #10b981)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent'}}>1</div>
-            <h4>Post Your Request</h4>
-            <p>Describe what you need and set your budget</p>
-          </div>
-          <div className="card" style={{position: 'relative'}}>
-            <div style={{fontSize: '3rem', marginBottom: 'var(--spacing-md)', fontWeight: 'bold', background: 'linear-gradient(135deg, #6366f1, #10b981)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent'}}>2</div>
-            <h4>Get Quotes</h4>
-            <p>Receive offers from qualified professionals</p>
-          </div>
-          <div className="card" style={{position: 'relative'}}>
-            <div style={{fontSize: '3rem', marginBottom: 'var(--spacing-md)', fontWeight: 'bold', background: 'linear-gradient(135deg, #6366f1, #10b981)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent'}}>3</div>
-            <h4>Book & Enjoy</h4>
-            <p>Choose the best fit and relax</p>
-          </div>
+          {steps.map((step) => (
+            <div key={step.num} className="card" style={{position: 'relative'}}>
+              <div className="gradient-text" style={{fontSize: '3rem', marginBottom: 'var(--spacing-md)', fontWeight: 'bold'}}>{step.num}</div>
+              <h4>{step.title}</h4>
+              <p>{step.description}</p>
+            </div>
+          ))}
         </div>
       </div>
     </section>

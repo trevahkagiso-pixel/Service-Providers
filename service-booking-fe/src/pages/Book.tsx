@@ -1,4 +1,12 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { SERVICES } from '../constants/services'
+import FeatureCard from '../components/FeatureCard'
+
+const TRUST_FEATURES = [
+  { icon: '⚡', title: 'Lightning Fast', description: 'Responses within minutes' },
+  { icon: '✅', title: 'Verified Pros', description: 'All checked and rated' },
+  { icon: '💰', title: 'Best Prices', description: 'Compare multiple quotes' }
+]
 
 export default function Book() {
   const [service, setService] = useState('')
@@ -7,31 +15,33 @@ export default function Book() {
   const [notes, setNotes] = useState('')
   const [submitted, setSubmitted] = useState(false)
 
-  function submit(e: React.FormEvent) {
-    e.preventDefault()
-    if (!service || !date || !address) {
-      alert('Please fill in all required fields')
-      return
-    }
-    console.log({service, date, address, notes})
-    setSubmitted(true)
-    setTimeout(() => {
+  useEffect(() => {
+    if (!submitted) return
+    const timer = setTimeout(() => {
       setService('')
       setDate('')
       setAddress('')
       setNotes('')
       setSubmitted(false)
     }, 3000)
+    return () => clearTimeout(timer)
+  }, [submitted])
+
+  function submit(e: React.FormEvent) {
+    e.preventDefault()
+    if (!service || !date || !address) {
+      alert('Please fill in all required fields')
+      return
+    }
+    setSubmitted(true)
   }
 
   return (
     <section>
       <div style={{maxWidth: '700px', margin: '0 auto'}}>
-        <div style={{textAlign: 'center', marginBottom: 'var(--spacing-2xl)'}}>
-          <h1 style={{marginBottom: 'var(--spacing-md)'}}>Request a Service</h1>
-          <p style={{fontSize: '1.1rem', color: 'var(--color-text-light)', marginBottom: 0}}>
-            Get matched with verified professionals in minutes
-          </p>
+        <div className="page-header">
+          <h1>Request a Service</h1>
+          <p>Get matched with verified professionals in minutes</p>
         </div>
 
         {submitted && (
@@ -61,14 +71,9 @@ export default function Book() {
               required
             >
               <option value="">Select a service</option>
-              <option value="Plumbing">🚰 Plumbing</option>
-              <option value="Electrical">⚡ Electrical</option>
-              <option value="Cleaning">✨ Cleaning</option>
-              <option value="Appliance Repair">🔧 Appliance Repair</option>
-              <option value="Gardening">🌿 Gardening</option>
-              <option value="Painting">🎨 Painting</option>
-              <option value="HVAC">❄️ HVAC</option>
-              <option value="Carpentry">🪵 Carpentry</option>
+              {SERVICES.map((s) => (
+                <option key={s.name} value={s.name}>{s.icon} {s.name}</option>
+              ))}
             </select>
           </div>
 
@@ -112,21 +117,9 @@ export default function Book() {
         </form>
 
         <div className="grid grid-3" style={{marginTop: 'var(--spacing-2xl)'}}>
-          <div className="card" style={{textAlign: 'center'}}>
-            <div style={{fontSize: '2.5rem', marginBottom: 'var(--spacing-md)'}}>⚡</div>
-            <h4>Lightning Fast</h4>
-            <p style={{fontSize: '0.9rem'}}>Responses within minutes</p>
-          </div>
-          <div className="card" style={{textAlign: 'center'}}>
-            <div style={{fontSize: '2.5rem', marginBottom: 'var(--spacing-md)'}}>✅</div>
-            <h4>Verified Pros</h4>
-            <p style={{fontSize: '0.9rem'}}>All checked and rated</p>
-          </div>
-          <div className="card" style={{textAlign: 'center'}}>
-            <div style={{fontSize: '2.5rem', marginBottom: 'var(--spacing-md)'}}>💰</div>
-            <h4>Best Prices</h4>
-            <p style={{fontSize: '0.9rem'}}>Compare multiple quotes</p>
-          </div>
+          {TRUST_FEATURES.map((feature) => (
+            <FeatureCard key={feature.title} {...feature} />
+          ))}
         </div>
       </div>
     </section>
