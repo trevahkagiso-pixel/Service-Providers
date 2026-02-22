@@ -56,7 +56,7 @@ section {
 
 /* Navigation */
 nav {
-  background: rgba(255, 255, 255, 0.7);
+  background: rgba(148, 163, 184, 0.3);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border-bottom: 1px solid rgba(226, 232, 240, 0.5);
@@ -271,7 +271,7 @@ nav .nav-container {
 
 /* Cards */
 .card {
-  background: rgba(255, 255, 255, 0.6);
+  background: rgba(148, 163, 184, 0.2);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border: 1px solid rgba(226, 232, 240, 0.8);
