@@ -1,14 +1,19 @@
 import { SERVICES } from '../constants/services'
 
 const PROVIDERS = [
-  { id: 1, name: 'John Martinez', service: 'Plumbing', rating: 4.9, reviews: 127, experience: '8 years', avatar: '👨🏽🔧', price: '$80-120/hr', specialties: ['Emergency repairs', 'Installations', 'Leak detection'] },
+  { id: 1, name: 'John Martinez', service: 'Plumbing', rating: 4.9, reviews: 127, experience: '8 years', avatar: '👨🏽🔧', price: '$80-120/hr', specialties: ['Emergency repairs', 'Installations', 'Leak detection'], verified: true },
   { id: 2, name: 'Sarah Chen', service: 'Electrical', rating: 4.8, reviews: 94, experience: '6 years', avatar: '👩🏻🔧', price: '$90-130/hr', specialties: ['Wiring', 'Panel upgrades', 'Smart home'] },
   { id: 3, name: 'Mike Johnson', service: 'Cleaning', rating: 4.9, reviews: 203, experience: '5 years', avatar: '🧑🏿💼', price: '$60-90/hr', specialties: ['Deep cleaning', 'Move-out', 'Commercial'] },
   { id: 4, name: 'Lisa Anderson', service: 'Appliance Repair', rating: 4.7, reviews: 81, experience: '10 years', avatar: '👩🏾🔧', price: '$75-110/hr', specialties: ['Refrigerators', 'Washers', 'Ovens'] },
-  { id: 5, name: 'David Kim', service: 'Gardening', rating: 4.8, reviews: 156, experience: '7 years', avatar: '👨🏻🌾', price: '$70-100/hr', specialties: ['Landscaping', 'Maintenance', 'Design'] },
+  { id: 5, name: 'David Kim', service: 'Gardening', rating: 4.8, reviews: 156, experience: '7 years', avatar: '👨🏻🌾', price: '$70-100/hr', specialties: ['Landscaping', 'Maintenance', 'Design'], verified: true },
   { id: 6, name: 'Emma Wilson', service: 'Painting', rating: 4.9, reviews: 142, experience: '9 years', avatar: '👩🏿🎨', price: '$65-95/hr', specialties: ['Interior', 'Exterior', 'Decorative'] },
   { id: 7, name: 'Carlos Rodriguez', service: 'HVAC', rating: 4.8, reviews: 118, experience: '12 years', avatar: '👨🏽🔧', price: '$95-140/hr', specialties: ['Installation', 'Maintenance', 'Repair'] },
-  { id: 8, name: 'Rachel Brown', service: 'Carpentry', rating: 4.9, reviews: 167, experience: '11 years', avatar: '👩🏾🔧', price: '$85-125/hr', specialties: ['Custom furniture', 'Repairs', 'Remodeling'] }
+  { id: 8, name: 'Rachel Brown', service: 'Carpentry', rating: 4.9, reviews: 167, experience: '11 years', avatar: '👩🏾🔧', price: '$85-125/hr', specialties: ['Custom furniture', 'Repairs', 'Remodeling'] },
+  { id: 9, name: 'James Thompson', service: 'Plumbing & Electrical', rating: 4.9, reviews: 215, experience: '15 years', avatar: '👨🏿🔧', price: '$100-150/hr', specialties: ['Plumbing repairs', 'Electrical wiring', 'Emergency services', 'Home renovations'], verified: true },
+  { id: 10, name: 'Maria Garcia', service: 'Cleaning & Gardening', rating: 4.8, reviews: 189, experience: '9 years', avatar: '👩🏽🌿', price: '$70-110/hr', specialties: ['Deep cleaning', 'Lawn care', 'Garden design', 'Seasonal maintenance'] },
+  { id: 11, name: 'Kevin Patel', service: 'Painting & Carpentry', rating: 4.9, reviews: 234, experience: '13 years', avatar: '👨🏾🎨', price: '$80-130/hr', specialties: ['Interior painting', 'Custom woodwork', 'Furniture building', 'Home finishing'] },
+  { id: 12, name: 'Aisha Mohammed', service: 'HVAC & Electrical & Plumbing', rating: 4.9, reviews: 278, experience: '16 years', avatar: '👩🏿🔧', price: '$110-160/hr', specialties: ['HVAC installation', 'Electrical systems', 'Plumbing repairs', 'Climate control', 'Emergency services'], verified: true },
+  { id: 13, name: 'Tom Chen', service: 'Carpentry & Painting & Appliance Repair', rating: 4.8, reviews: 192, experience: '11 years', avatar: '👨🏻🔨', price: '$85-135/hr', specialties: ['Custom carpentry', 'Interior/exterior painting', 'Appliance diagnostics', 'Home repairs', 'Furniture restoration'] }
 ]
 
 export default function Providers() {
@@ -41,7 +46,10 @@ export default function Providers() {
                 {provider.avatar}
               </div>
               <div style={{flex: 1}}>
-                <h3 style={{marginBottom: 'var(--spacing-xs)', fontSize: '1.3rem'}}>{provider.name}</h3>
+                <h3 style={{marginBottom: 'var(--spacing-xs)', fontSize: '1.3rem', display: 'flex', alignItems: 'center', gap: 'var(--spacing-sm)'}}>
+                  {provider.name}
+                  {provider.verified && <span style={{fontSize: '1rem', color: '#10b981'}} title="Verified Provider">✓</span>}
+                </h3>
                 <div style={{display: 'flex', alignItems: 'center', gap: 'var(--spacing-sm)', marginBottom: 'var(--spacing-sm)'}}>
                   <span style={{fontSize: '1.1rem'}}>{getServiceIcon(provider.service)}</span>
                   <span style={{color: 'var(--color-text-light)', fontWeight: 600}}>{provider.service}</span>
