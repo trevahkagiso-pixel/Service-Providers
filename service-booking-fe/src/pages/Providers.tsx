@@ -29,7 +29,7 @@ export default function Providers() {
   const filteredProviders = PROVIDERS.filter(provider => {
     const matchesCategory = categoryFilter === 'All' || provider.service.includes(categoryFilter)
     const matchesVerified = !verifiedFilter || provider.verified
-    const matchesLongService = !longServiceFilter || parseInt(provider.experience) >= 10
+    const matchesLongService = !longServiceFilter || parseInt(provider.experience) >= 5
     return matchesCategory && matchesVerified && matchesLongService
   })
 
@@ -69,7 +69,7 @@ export default function Providers() {
             onChange={(e) => setLongServiceFilter(e.target.checked)}
             style={{cursor: 'pointer', margin: 0}}
           />
-          10+ Years Experience
+          5+ Years Experience
         </label>
       </div>
 
@@ -99,12 +99,11 @@ export default function Providers() {
                   <span style={{fontSize: '1.1rem'}}>{getServiceIcon(provider.service)}</span>
                   <span style={{color: 'var(--color-text-light)', fontWeight: 600}}>{provider.service}</span>
                 </div>
-                <div style={{display: 'flex', alignItems: 'center', gap: 'var(--spacing-md)', flexWrap: 'wrap'}}>
-                  <div style={{background: 'linear-gradient(135deg, #f59e0b, #d97706)', color: 'white', padding: '0.25rem 0.6rem', borderRadius: 'var(--radius-sm)', fontSize: '0.85rem', fontWeight: 700}}>
+                <div style={{display: 'flex', alignItems: 'center', gap: 'var(--spacing-md)', flexWrap: 'nowrap'}}>
+                  <div style={{background: 'linear-gradient(135deg, #f59e0b, #d97706)', color: 'white', padding: '0.25rem 0.6rem', borderRadius: 'var(--radius-sm)', fontSize: '0.85rem', fontWeight: 700, whiteSpace: 'nowrap'}}>
                     ⭐ {provider.rating}
                   </div>
-                  <span style={{fontSize: '0.85rem', color: 'var(--color-text-light)'}}>{provider.reviews} reviews</span>
-                  <span style={{fontSize: '0.85rem', color: 'var(--color-text-light)'}}>• {provider.experience}</span>
+                  <span style={{fontSize: '0.85rem', color: 'var(--color-text-light)', whiteSpace: 'nowrap'}}>{provider.reviews} reviews • {provider.experience}</span>
                 </div>
               </div>
             </div>
