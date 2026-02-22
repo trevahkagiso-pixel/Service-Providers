@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { Routes, Route, Navigate, Link } from 'react-router-dom'
 import Home from './pages/Home'
 import Services from './pages/Services'
-import Book from './pages/Book'
+import Providers from './pages/Providers'
 import ProviderSignup from './pages/ProviderSignup'
 
 export default function App() {
@@ -29,7 +29,7 @@ export default function App() {
           <Link to="/" className="nav-brand">🔧 ServiceHub</Link>
           <div className="nav-links">
             <Link to="/services">Services</Link>
-            <Link to="/book">Book</Link>
+            <Link to="/providers">Providers</Link>
             <Link to="/provider-signup" className="cta-btn">Become a Provider</Link>
             <button 
               onClick={() => setIsDark(!isDark)}
@@ -55,7 +55,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/services" element={<Services />} />
-          <Route path="/book" element={<Book />} />
+          <Route path="/providers" element={<Providers />} />
           <Route path="/provider-signup" element={<ProviderSignup />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
