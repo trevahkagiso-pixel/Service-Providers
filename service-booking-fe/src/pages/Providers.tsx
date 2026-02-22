@@ -1,14 +1,14 @@
 import { SERVICES } from '../constants/services'
 
 const PROVIDERS = [
-  { id: 1, name: 'John Martinez', service: 'Plumbing', rating: 4.9, reviews: 127, experience: '8 years', avatar: '👨‍🔧', price: '$80-120/hr', specialties: 'Emergency repairs, Installations, Leak detection' },
-  { id: 2, name: 'Sarah Chen', service: 'Electrical', rating: 4.8, reviews: 94, experience: '6 years', avatar: '👩‍🔧', price: '$90-130/hr', specialties: 'Wiring, Panel upgrades, Smart home' },
-  { id: 3, name: 'Mike Johnson', service: 'Cleaning', rating: 4.9, reviews: 203, experience: '5 years', avatar: '🧑‍💼', price: '$60-90/hr', specialties: 'Deep cleaning, Move-out, Commercial' },
-  { id: 4, name: 'Lisa Anderson', service: 'Appliance Repair', rating: 4.7, reviews: 81, experience: '10 years', avatar: '👩‍🔧', price: '$75-110/hr', specialties: 'Refrigerators, Washers, Ovens' },
-  { id: 5, name: 'David Kim', service: 'Gardening', rating: 4.8, reviews: 156, experience: '7 years', avatar: '👨‍🌾', price: '$70-100/hr', specialties: 'Landscaping, Maintenance, Design' },
-  { id: 6, name: 'Emma Wilson', service: 'Painting', rating: 4.9, reviews: 142, experience: '9 years', avatar: '👩‍🎨', price: '$65-95/hr', specialties: 'Interior, Exterior, Decorative' },
-  { id: 7, name: 'Carlos Rodriguez', service: 'HVAC', rating: 4.8, reviews: 118, experience: '12 years', avatar: '👨‍🔧', price: '$95-140/hr', specialties: 'Installation, Maintenance, Repair' },
-  { id: 8, name: 'Rachel Brown', service: 'Carpentry', rating: 4.9, reviews: 167, experience: '11 years', avatar: '👩‍🔧', price: '$85-125/hr', specialties: 'Custom furniture, Repairs, Remodeling' }
+  { id: 1, name: 'John Martinez', service: 'Plumbing', rating: 4.9, reviews: 127, experience: '8 years', avatar: '👨🏽🔧', price: '$80-120/hr', specialties: ['Emergency repairs', 'Installations', 'Leak detection'] },
+  { id: 2, name: 'Sarah Chen', service: 'Electrical', rating: 4.8, reviews: 94, experience: '6 years', avatar: '👩🏻🔧', price: '$90-130/hr', specialties: ['Wiring', 'Panel upgrades', 'Smart home'] },
+  { id: 3, name: 'Mike Johnson', service: 'Cleaning', rating: 4.9, reviews: 203, experience: '5 years', avatar: '🧑🏿💼', price: '$60-90/hr', specialties: ['Deep cleaning', 'Move-out', 'Commercial'] },
+  { id: 4, name: 'Lisa Anderson', service: 'Appliance Repair', rating: 4.7, reviews: 81, experience: '10 years', avatar: '👩🏾🔧', price: '$75-110/hr', specialties: ['Refrigerators', 'Washers', 'Ovens'] },
+  { id: 5, name: 'David Kim', service: 'Gardening', rating: 4.8, reviews: 156, experience: '7 years', avatar: '👨🏻🌾', price: '$70-100/hr', specialties: ['Landscaping', 'Maintenance', 'Design'] },
+  { id: 6, name: 'Emma Wilson', service: 'Painting', rating: 4.9, reviews: 142, experience: '9 years', avatar: '👩🏿🎨', price: '$65-95/hr', specialties: ['Interior', 'Exterior', 'Decorative'] },
+  { id: 7, name: 'Carlos Rodriguez', service: 'HVAC', rating: 4.8, reviews: 118, experience: '12 years', avatar: '👨🏽🔧', price: '$95-140/hr', specialties: ['Installation', 'Maintenance', 'Repair'] },
+  { id: 8, name: 'Rachel Brown', service: 'Carpentry', rating: 4.9, reviews: 167, experience: '11 years', avatar: '👩🏾🔧', price: '$85-125/hr', specialties: ['Custom furniture', 'Repairs', 'Remodeling'] }
 ]
 
 export default function Providers() {
@@ -60,18 +60,16 @@ export default function Providers() {
               <p style={{fontSize: '0.9rem', color: 'var(--color-text-light)', marginBottom: 'var(--spacing-sm)', fontWeight: 600}}>
                 Specialties:
               </p>
-              <p style={{fontSize: '0.9rem', margin: 0}}>
-                {provider.specialties}
-              </p>
+              <ul style={{margin: 0, paddingLeft: 'var(--spacing-lg)', fontSize: '0.9rem'}}>
+                {provider.specialties.map((specialty, idx) => (
+                  <li key={idx} style={{marginBottom: 'var(--spacing-xs)'}}>{specialty}</li>
+                ))}
+              </ul>
             </div>
 
-            <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: 'var(--spacing-md)', borderTop: '1px solid var(--color-border)'}}>
-              <div>
-                <span style={{fontSize: '0.85rem', color: 'var(--color-text-light)', display: 'block'}}>Rate</span>
-                <span style={{fontSize: '1.2rem', fontWeight: 700, color: 'var(--color-primary)'}}>{provider.price}</span>
-              </div>
+            <div style={{display: 'flex', justifyContent: 'flex-end', alignItems: 'center', paddingTop: 'var(--spacing-md)', borderTop: '1px solid var(--color-border)'}}>
               <button className="btn btn-primary">
-                Book Now
+                💬 Chat With {provider.name.split(' ')[0]}
               </button>
             </div>
           </div>
