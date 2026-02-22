@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { SERVICES } from '../constants/services'
 
 const PROVIDERS = [
@@ -17,9 +18,20 @@ const PROVIDERS = [
 ]
 
 export default function Providers() {
+  const [categoryFilter, setCategoryFilter] = useState('All')
+  const [verifiedFilter, setVerifiedFilter] = useState(false)
+  const [longServiceFilter, setLongServiceFilter] = useState(false)
+
   const getServiceIcon = (serviceName: string) => {
     return SERVICES.find(s => s.name === serviceName)?.icon || '🔧'
   }
+
+  const filteredProviders = PROVIDERS.filter(provider => {
+    const matchesCategory = categoryFilter === 'All' || provider.service.includes(categoryFilter)
+    const matchesVerified = !verifiedFilter || provider.verified
+    const matchesLongService = !longServiceFilter || parseInt(provider.experience) >= 10
+    return matchesCategory && matchesVerified && matchesLongService
+  })
 
   return (
     <section>
@@ -28,8 +40,41 @@ export default function Providers() {
         <p>Connect with verified professionals. View profiles, ratings, and book directly.</p>
       </div>
 
+      <div style={{marginBottom: 'var(--spacing-xl)', display: 'flex', gap: 'var(--spacing-md)', flexWrap: 'wrap'}}>
+        <select 
+          value={categoryFilter} 
+          onChange={(e) => setCategoryFilter(e.target.value)}
+          style={{padding: 'var(--spacing-sm) var(--spacing-md)', borderRadius: 'var(--radius-md)', border: '2px solid var(--color-border)', fontSize: '0.9rem', cursor: 'pointer', height: '38px'}}
+        >
+          <option value="All">All Services</option>
+          {SERVICES.map(s => (
+            <option key={s.name} value={s.name}>{s.icon} {s.name}</option>
+          ))}
+        </select>
+
+        <label style={{display: 'flex', alignItems: 'center', gap: 'var(--spacing-sm)', cursor: 'pointer', padding: 'var(--spacing-sm) var(--spacing-md)', background: verifiedFilter ? 'rgba(16, 185, 129, 0.1)' : 'transparent', borderRadius: 'var(--radius-md)', border: '2px solid var(--color-border)', fontSize: '0.9rem', height: '38px'}}>
+          <input 
+            type="checkbox" 
+            checked={verifiedFilter} 
+            onChange={(e) => setVerifiedFilter(e.target.checked)}
+            style={{cursor: 'pointer', margin: 0}}
+          />
+          ✓ Verified Only
+        </label>
+
+        <label style={{display: 'flex', alignItems: 'center', gap: 'var(--spacing-sm)', cursor: 'pointer', padding: 'var(--spacing-sm) var(--spacing-md)', background: longServiceFilter ? 'rgba(99, 102, 241, 0.1)' : 'transparent', borderRadius: 'var(--radius-md)', border: '2px solid var(--color-border)', fontSize: '0.9rem', height: '38px'}}>
+          <input 
+            type="checkbox" 
+            checked={longServiceFilter} 
+            onChange={(e) => setLongServiceFilter(e.target.checked)}
+            style={{cursor: 'pointer', margin: 0}}
+          />
+          10+ Years Experience
+        </label>
+      </div>
+
       <div className="grid grid-2">
-        {PROVIDERS.map((provider) => (
+        {filteredProviders.map((provider) => (
           <div key={provider.id} className="card" style={{padding: 'var(--spacing-xl)'}}>
             <div style={{display: 'flex', gap: 'var(--spacing-lg)', marginBottom: 'var(--spacing-lg)'}}>
               <div style={{
