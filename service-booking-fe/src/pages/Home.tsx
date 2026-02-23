@@ -31,7 +31,7 @@ export default function Home() {
         <p>Connect with verified professionals for plumbing, electrical, cleaning, and more. Experience hassle-free booking with guaranteed quality and competitive pricing.</p>
         <div className="hero-buttons">
           <Link to="/services" className="btn btn-primary">Browse Services</Link>
-          <Link to="/book" className="btn btn-secondary">Book Now</Link>
+          <Link to="/providers" className="btn btn-secondary">View Providers</Link>
         </div>
       </div>
 

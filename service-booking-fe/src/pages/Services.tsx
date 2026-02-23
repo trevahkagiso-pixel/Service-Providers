@@ -23,8 +23,8 @@ export default function Services() {
             <p style={{marginBottom: 'var(--spacing-lg)', fontSize: '0.85rem', color: 'var(--color-text-light)', fontWeight: 500}}>
               {service.services}
             </p>
-            <Link to="/book" className="btn btn-primary" style={{width: '100%', textAlign: 'center', display: 'block'}}>
-              Book {service.name}
+            <Link to="/providers" className="btn btn-primary" style={{width: '100%', textAlign: 'center', display: 'block'}}>
+              View Providers
             </Link>
           </div>
         ))}
@@ -35,7 +35,7 @@ export default function Services() {
         <p style={{marginBottom: 'var(--spacing-lg)', color: 'var(--color-text-light)'}}>
           Post a custom request and we'll find qualified professionals to match your exact needs
         </p>
-        <Link to="/book" className="btn btn-secondary">Post a Request</Link>
+        <Link to="/providers" className="btn btn-secondary">View Providers</Link>
       </div>
     </section>
   )
