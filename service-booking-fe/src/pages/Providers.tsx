@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { SERVICES } from '../constants/services'
 
 const PROVIDERS = [
@@ -21,6 +21,14 @@ export default function Providers() {
   const [categoryFilter, setCategoryFilter] = useState('All')
   const [verifiedFilter, setVerifiedFilter] = useState(false)
   const [longServiceFilter, setLongServiceFilter] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 768)
+    handleResize()
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
 
   const getServiceIcon = (serviceName: string) => {
     return SERVICES.find(s => s.name === serviceName)?.icon || '🔧'
@@ -77,8 +85,8 @@ export default function Providers() {
 
       <div className="grid grid-2">
         {filteredProviders.map((provider, index) => (
-          <div key={provider.id} className="card" style={{padding: 'var(--spacing-xl)', cursor: 'pointer', transition: 'all var(--transition-base)', animationDelay: `${index * 0.1}s`}} onMouseEnter={(e) => {e.currentTarget.style.transform = 'translateY(-8px) scale(1.02)'; e.currentTarget.style.boxShadow = '0 20px 40px rgba(0,0,0,0.15)'}} onMouseLeave={(e) => {e.currentTarget.style.transform = 'translateY(0) scale(1)'; e.currentTarget.style.boxShadow = ''}}>
-            <div style={{display: 'flex', gap: 'var(--spacing-lg)', marginBottom: 'var(--spacing-lg)', flexDirection: window.innerWidth < 768 ? 'column' : 'row', alignItems: window.innerWidth < 768 ? 'center' : 'flex-start'}}>
+          <div key={provider.id} className="card" style={{padding: isMobile ? 'var(--spacing-md)' : 'var(--spacing-xl)', cursor: 'pointer', transition: 'all var(--transition-base)', animationDelay: `${index * 0.1}s`}} onMouseEnter={(e) => {e.currentTarget.style.transform = 'translateY(-8px) scale(1.02)'; e.currentTarget.style.boxShadow = '0 20px 40px rgba(0,0,0,0.15)'}} onMouseLeave={(e) => {e.currentTarget.style.transform = 'translateY(0) scale(1)'; e.currentTarget.style.boxShadow = ''}}>
+            <div style={{display: 'flex', gap: 'var(--spacing-lg)', marginBottom: 'var(--spacing-lg)', flexDirection: isMobile ? 'column' : 'row', alignItems: isMobile ? 'center' : 'flex-start'}}>
               <div style={{
                 fontSize: '3.5rem',
                 width: '80px',
@@ -95,16 +103,16 @@ export default function Providers() {
               onMouseLeave={(e) => {e.currentTarget.style.transform = 'rotate(0deg) scale(1)'; e.currentTarget.style.background = 'linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(16, 185, 129, 0.1))'}}>
                 {provider.avatar}
               </div>
-              <div style={{flex: 1, textAlign: window.innerWidth < 768 ? 'center' : 'left'}}>
-                <h3 style={{marginBottom: 'var(--spacing-xs)', fontSize: '1.3rem', display: 'flex', alignItems: 'center', gap: 'var(--spacing-sm)'}}>
+              <div style={{flex: 1, textAlign: isMobile ? 'center' : 'left'}}>
+                <h3 style={{marginBottom: 'var(--spacing-xs)', fontSize: '1.3rem', display: 'flex', alignItems: 'center', gap: 'var(--spacing-sm)', justifyContent: isMobile ? 'center' : 'flex-start'}}>
                   {provider.name}
                   {provider.verified && <span style={{fontSize: '1rem', color: '#10b981'}} title="Verified Provider">✓</span>}
                 </h3>
-                <div style={{display: 'flex', alignItems: 'center', gap: 'var(--spacing-sm)', marginBottom: 'var(--spacing-sm)'}}>
+                <div style={{display: 'flex', alignItems: 'center', gap: 'var(--spacing-sm)', marginBottom: 'var(--spacing-sm)', justifyContent: isMobile ? 'center' : 'flex-start'}}>
                   <span style={{fontSize: '1.1rem'}}>{getServiceIcon(provider.service)}</span>
                   <span style={{color: 'var(--color-text-light)', fontWeight: 600}}>{provider.service}</span>
                 </div>
-                <div style={{display: 'flex', alignItems: 'center', gap: 'var(--spacing-md)', flexWrap: 'nowrap'}}>
+                <div style={{display: 'flex', alignItems: 'center', gap: 'var(--spacing-md)', flexWrap: 'wrap', justifyContent: isMobile ? 'center' : 'flex-start'}}>
                   <div style={{background: 'linear-gradient(135deg, #f59e0b, #d97706)', color: 'white', padding: '0.25rem 0.6rem', borderRadius: 'var(--radius-sm)', fontSize: '0.85rem', fontWeight: 700, whiteSpace: 'nowrap', transition: 'all var(--transition-fast)'}} onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.1)'} onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}>
                     ⭐ {provider.rating}
                   </div>
@@ -124,8 +132,8 @@ export default function Providers() {
               </ul>
             </div>
 
-            <div style={{display: 'flex', justifyContent: 'flex-end', alignItems: 'center', paddingTop: 'var(--spacing-md)', borderTop: '1px solid var(--color-border)', flexDirection: window.innerWidth < 768 ? 'column' : 'row', gap: 'var(--spacing-sm)'}}>
-              <button className="btn btn-primary" style={{transition: 'all var(--transition-fast)', width: window.innerWidth < 768 ? '100%' : 'auto'}} onMouseEnter={(e) => {e.currentTarget.style.transform = 'scale(1.05)'; e.currentTarget.style.boxShadow = '0 8px 20px rgba(99, 102, 241, 0.4)'}} onMouseLeave={(e) => {e.currentTarget.style.transform = 'scale(1)'; e.currentTarget.style.boxShadow = ''}}>
+            <div style={{display: 'flex', justifyContent: 'flex-end', alignItems: 'center', paddingTop: 'var(--spacing-md)', borderTop: '1px solid var(--color-border)'}}>
+              <button className="btn btn-primary" style={{transition: 'all var(--transition-fast)', width: isMobile ? '100%' : 'auto'}} onMouseEnter={(e) => {e.currentTarget.style.transform = 'scale(1.05)'; e.currentTarget.style.boxShadow = '0 8px 20px rgba(99, 102, 241, 0.4)'}} onMouseLeave={(e) => {e.currentTarget.style.transform = 'scale(1)'; e.currentTarget.style.boxShadow = ''}}>
                 💬 Chat With {provider.name.split(' ')[0]}
               </button>
             </div>
