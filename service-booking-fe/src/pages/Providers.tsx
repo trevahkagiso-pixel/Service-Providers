@@ -44,7 +44,9 @@ export default function Providers() {
         <select 
           value={categoryFilter} 
           onChange={(e) => setCategoryFilter(e.target.value)}
-          style={{padding: 'var(--spacing-sm) var(--spacing-md)', borderRadius: 'var(--radius-md)', border: '2px solid var(--color-border)', fontSize: '0.9rem', cursor: 'pointer', height: '38px'}}
+          style={{padding: 'var(--spacing-sm) var(--spacing-md)', borderRadius: 'var(--radius-md)', border: '2px solid var(--color-border)', fontSize: '0.9rem', cursor: 'pointer', height: '38px', transition: 'all var(--transition-fast)', background: 'white', flex: '1 1 auto', minWidth: '150px'}}
+          onMouseEnter={(e) => e.currentTarget.style.borderColor = '#6366f1'}
+          onMouseLeave={(e) => e.currentTarget.style.borderColor = 'var(--color-border)'}
         >
           <option value="All">All Services</option>
           {SERVICES.map(s => (
@@ -52,7 +54,7 @@ export default function Providers() {
           ))}
         </select>
 
-        <label style={{display: 'flex', alignItems: 'center', gap: 'var(--spacing-sm)', cursor: 'pointer', padding: 'var(--spacing-sm) var(--spacing-md)', background: verifiedFilter ? 'rgba(16, 185, 129, 0.1)' : 'transparent', borderRadius: 'var(--radius-md)', border: '2px solid var(--color-border)', fontSize: '0.9rem', height: '38px'}}>
+        <label style={{display: 'flex', alignItems: 'center', gap: 'var(--spacing-sm)', cursor: 'pointer', padding: 'var(--spacing-sm) var(--spacing-md)', background: verifiedFilter ? 'rgba(16, 185, 129, 0.1)' : 'transparent', borderRadius: 'var(--radius-md)', border: '2px solid var(--color-border)', fontSize: '0.9rem', height: '38px', transition: 'all var(--transition-fast)', flex: '1 1 auto', minWidth: '140px', justifyContent: 'center'}} onMouseEnter={(e) => {e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.1)'}} onMouseLeave={(e) => {e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = 'none'}}>
           <input 
             type="checkbox" 
             checked={verifiedFilter} 
@@ -62,7 +64,7 @@ export default function Providers() {
           ✓ Verified Only
         </label>
 
-        <label style={{display: 'flex', alignItems: 'center', gap: 'var(--spacing-sm)', cursor: 'pointer', padding: 'var(--spacing-sm) var(--spacing-md)', background: longServiceFilter ? 'rgba(99, 102, 241, 0.1)' : 'transparent', borderRadius: 'var(--radius-md)', border: '2px solid var(--color-border)', fontSize: '0.9rem', height: '38px'}}>
+        <label style={{display: 'flex', alignItems: 'center', gap: 'var(--spacing-sm)', cursor: 'pointer', padding: 'var(--spacing-sm) var(--spacing-md)', background: longServiceFilter ? 'rgba(99, 102, 241, 0.1)' : 'transparent', borderRadius: 'var(--radius-md)', border: '2px solid var(--color-border)', fontSize: '0.9rem', height: '38px', transition: 'all var(--transition-fast)', flex: '1 1 auto', minWidth: '140px', justifyContent: 'center'}} onMouseEnter={(e) => {e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.1)'}} onMouseLeave={(e) => {e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = 'none'}}>
           <input 
             type="checkbox" 
             checked={longServiceFilter} 
@@ -74,9 +76,9 @@ export default function Providers() {
       </div>
 
       <div className="grid grid-2">
-        {filteredProviders.map((provider) => (
-          <div key={provider.id} className="card" style={{padding: 'var(--spacing-xl)'}}>
-            <div style={{display: 'flex', gap: 'var(--spacing-lg)', marginBottom: 'var(--spacing-lg)'}}>
+        {filteredProviders.map((provider, index) => (
+          <div key={provider.id} className="card" style={{padding: 'var(--spacing-xl)', cursor: 'pointer', transition: 'all var(--transition-base)', animationDelay: `${index * 0.1}s`}} onMouseEnter={(e) => {e.currentTarget.style.transform = 'translateY(-8px) scale(1.02)'; e.currentTarget.style.boxShadow = '0 20px 40px rgba(0,0,0,0.15)'}} onMouseLeave={(e) => {e.currentTarget.style.transform = 'translateY(0) scale(1)'; e.currentTarget.style.boxShadow = ''}}>
+            <div style={{display: 'flex', gap: 'var(--spacing-lg)', marginBottom: 'var(--spacing-lg)', flexDirection: window.innerWidth < 768 ? 'column' : 'row', alignItems: window.innerWidth < 768 ? 'center' : 'flex-start'}}>
               <div style={{
                 fontSize: '3.5rem',
                 width: '80px',
@@ -86,11 +88,14 @@ export default function Providers() {
                 justifyContent: 'center',
                 background: 'linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(16, 185, 129, 0.1))',
                 borderRadius: 'var(--radius-lg)',
-                flexShrink: 0
-              }}>
+                flexShrink: 0,
+                transition: 'all var(--transition-base)'
+              }}
+              onMouseEnter={(e) => {e.currentTarget.style.transform = 'rotate(5deg) scale(1.1)'; e.currentTarget.style.background = 'linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(16, 185, 129, 0.2))'}} 
+              onMouseLeave={(e) => {e.currentTarget.style.transform = 'rotate(0deg) scale(1)'; e.currentTarget.style.background = 'linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(16, 185, 129, 0.1))'}}>
                 {provider.avatar}
               </div>
-              <div style={{flex: 1}}>
+              <div style={{flex: 1, textAlign: window.innerWidth < 768 ? 'center' : 'left'}}>
                 <h3 style={{marginBottom: 'var(--spacing-xs)', fontSize: '1.3rem', display: 'flex', alignItems: 'center', gap: 'var(--spacing-sm)'}}>
                   {provider.name}
                   {provider.verified && <span style={{fontSize: '1rem', color: '#10b981'}} title="Verified Provider">✓</span>}
@@ -100,7 +105,7 @@ export default function Providers() {
                   <span style={{color: 'var(--color-text-light)', fontWeight: 600}}>{provider.service}</span>
                 </div>
                 <div style={{display: 'flex', alignItems: 'center', gap: 'var(--spacing-md)', flexWrap: 'nowrap'}}>
-                  <div style={{background: 'linear-gradient(135deg, #f59e0b, #d97706)', color: 'white', padding: '0.25rem 0.6rem', borderRadius: 'var(--radius-sm)', fontSize: '0.85rem', fontWeight: 700, whiteSpace: 'nowrap'}}>
+                  <div style={{background: 'linear-gradient(135deg, #f59e0b, #d97706)', color: 'white', padding: '0.25rem 0.6rem', borderRadius: 'var(--radius-sm)', fontSize: '0.85rem', fontWeight: 700, whiteSpace: 'nowrap', transition: 'all var(--transition-fast)'}} onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.1)'} onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}>
                     ⭐ {provider.rating}
                   </div>
                   <span style={{fontSize: '0.85rem', color: 'var(--color-text-light)', whiteSpace: 'nowrap'}}>{provider.reviews} reviews • {provider.experience}</span>
@@ -119,8 +124,8 @@ export default function Providers() {
               </ul>
             </div>
 
-            <div style={{display: 'flex', justifyContent: 'flex-end', alignItems: 'center', paddingTop: 'var(--spacing-md)', borderTop: '1px solid var(--color-border)'}}>
-              <button className="btn btn-primary">
+            <div style={{display: 'flex', justifyContent: 'flex-end', alignItems: 'center', paddingTop: 'var(--spacing-md)', borderTop: '1px solid var(--color-border)', flexDirection: window.innerWidth < 768 ? 'column' : 'row', gap: 'var(--spacing-sm)'}}>
+              <button className="btn btn-primary" style={{transition: 'all var(--transition-fast)', width: window.innerWidth < 768 ? '100%' : 'auto'}} onMouseEnter={(e) => {e.currentTarget.style.transform = 'scale(1.05)'; e.currentTarget.style.boxShadow = '0 8px 20px rgba(99, 102, 241, 0.4)'}} onMouseLeave={(e) => {e.currentTarget.style.transform = 'scale(1)'; e.currentTarget.style.boxShadow = ''}}>
                 💬 Chat With {provider.name.split(' ')[0]}
               </button>
             </div>
